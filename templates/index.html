@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Sistema Academico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
 <body>
+    <img src="{{ url_for('static', filename='imagens/icon_ifma.png') }}" alt="Logo IFMA">
+
+
     <h1>Cadastro de Alunos</h1>
     <a href="/cadastro_aluno">Cadastrar novo aluno</a>
     <ul>
@@ -18,6 +22,13 @@
     <ul>
         {% for professor in professores %}
             <li>{{ professor[0] }} - {{ professor[1] }} - {{ professor[2] }}</li>
+        {% endfor %}
+    </ul>
+    <h1>Cadastro de Disciplina</h1>
+    <a href="/cadastro_disciplina">Cadastrar nova Disciplina</a>
+    <ul>
+        {% for disciplina in disciplinas %}
+            <li>{{ disciplina[0] }} - {{ disciplina[1] }}</li>
         {% endfor %}
     </ul>
 
