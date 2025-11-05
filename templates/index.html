@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
 <body>
-    <img src="{{ url_for('static', filename='imagens/icon_ifma.png') }}" alt="Logo IFMA">
-
-
-    <h1>Cadastro de Alunos</h1>
+    <header>
+        <img src="{{ url_for('static', filename='imagens/icon_ifma.png') }}" alt="Logo IFMA"  width="380" height="122">
+    </header>
+    <main>
+        <h1>Cadastro de Alunos</h1>
     <a href="/cadastro_aluno">Cadastrar novo aluno</a>
     <ul>
         {% for aluno in alunos %}
@@ -31,6 +32,6 @@
             <li>{{ disciplina[0] }} - {{ disciplina[1] }}</li>
         {% endfor %}
     </ul>
-
+    </main>
 </body>
 </html>
