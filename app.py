@@ -12,8 +12,10 @@ def index():
     alunos = cursor.fetchall()
     cursor.execute('SELECT professor.nome, professor.email, curso.nome FROM professor JOIN curso ON professor.curso_id = curso.id')
     professores = cursor.fetchall()
+    cursor.execute('SELECT disciplina.nome, curso.nome FROM disciplina JOIN curso ON disciplina.curso_id = curso.id')
+    disciplinas = cursor.fetchall()
     conexao.close()
-    return render_template('index.html', alunos=alunos,professores=professores)
+    return render_template('index.html', alunos=alunos,professores=professores,disciplinas=disciplinas)
 
 # Página de cadastro de Aluno
 @app.route('/cadastro_aluno', methods=['GET', 'POST'])
@@ -54,6 +56,25 @@ def cadastro_professor():
     cursos = cursor.fetchall()
     conexao.close()
     return render_template('cadastro_professor.html', cursos=cursos)
+
+# Página de cadastro de Disciplina
+@app.route('/cadastro_disciplina', methods=['GET', 'POST'])
+def cadastro_disciplina():
+    conexao = sqlite3.connect('banco.db')
+    cursor = conexao.cursor()
+    
+    if request.method == 'POST':
+        nome = request.form['nome']
+        curso_id = request.form['curso_id']
+        cursor.execute('INSERT INTO disciplina (nome, curso_id) VALUES (?, ?)', (nome, curso_id))
+        conexao.commit()
+        conexao.close()
+        return redirect('/')
+    
+    cursor.execute('SELECT * FROM curso')
+    cursos = cursor.fetchall()
+    conexao.close()
+    return render_template('cadastro_disciplina.html', cursos=cursos)
 
 if __name__ == '__main__':
     app.run(debug=True)
