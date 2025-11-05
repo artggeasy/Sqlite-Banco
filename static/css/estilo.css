@@ -1,0 +1,17 @@
+html {
+  background-color: #e5e6e7;
+}
+body {
+  margin: 0 auto;
+  
+  
+}
+img {
+  float: left;
+  margin-right: 100px;
+  height: 122px;
+  width: 380px;  
+  display: block;
+
+  background-color: #b9c2bb;
+}
