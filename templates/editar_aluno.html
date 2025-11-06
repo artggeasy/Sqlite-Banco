@@ -1,0 +1,19 @@
+<h1>Editar Aluno</h1>
+<form method="post">
+    <label>Nome:</label>
+    <input type="text" name="nome" value="{{ aluno[1] }}" required><br><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" value="{{ aluno[2] }}" required><br><br>
+
+    <label>Curso:</label>
+    <select name="curso_id">
+        {% for curso in cursos %}
+            <option value="{{ curso[0] }}" {% if curso[0] == aluno[3] %}selected{% endif %}>
+                {{ curso[1] }}
+            </option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
