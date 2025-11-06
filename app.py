@@ -76,5 +76,39 @@ def cadastro_disciplina():
     conexao.close()
     return render_template('cadastro_disciplina.html', cursos=cursos)
 
+#pagina deletar aluno
+@app.route('/deletar_aluno/<int:id>')
+def deletar_aluno(id):
+    conexao = sqlite3.connect('banco.db')
+    cursor = conexao.cursor()
+    cursor.execute('DELETE FROM aluno WHERE id = ?', (id,))
+    conexao.commit()
+    conexao.close()
+    return redirect('/')
+
+#pagina editar aluno
+@app.route('/editar_aluno/<int:id>', methods=['GET', 'POST'])
+def editar_aluno(id):
+    conexao = sqlite3.connect('banco.db')
+    cursor = conexao.cursor()
+    
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        curso_id = request.form['curso_id']
+        cursor.execute('UPDATE aluno SET nome=?, email=?, curso_id=? WHERE id=?', (nome, email, curso_id, id))
+        conexao.commit()
+        conexao.close()
+        return redirect('/')
+    
+    cursor.execute('SELECT * FROM aluno WHERE id = ?', (id,))
+    aluno = cursor.fetchone()
+    cursor.execute('SELECT * FROM curso')
+    cursos = cursor.fetchall()
+    conexao.close()
+    return render_template('editar_aluno.html', aluno=aluno, cursos=cursos)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
