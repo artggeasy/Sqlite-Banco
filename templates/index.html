@@ -6,32 +6,69 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
 <body>
-    <header>
-        <img src="{{ url_for('static', filename='imagens/icon_ifma.png') }}" alt="Logo IFMA"  width="380" height="122">
-    </header>
     <main>
-        <h1>Cadastro de Alunos</h1>
-    <a href="/cadastro_aluno">Cadastrar novo aluno</a>
-    <ul>
-        {% for aluno in alunos %}
-            <li>{{ aluno[0] }} - {{ aluno[1] }} - {{ aluno[2] }}</li>
-        {% endfor %}
-    </ul>
-    <br>
-    <h1>Cadastro de Professores</h1>
-    <a href="/cadastro_professor">Cadastrar novo Professor</a>
-    <ul>
-        {% for professor in professores %}
-            <li>{{ professor[0] }} - {{ professor[1] }} - {{ professor[2] }}</li>
-        {% endfor %}
-    </ul>
-    <h1>Cadastro de Disciplina</h1>
-    <a href="/cadastro_disciplina">Cadastrar nova Disciplina</a>
-    <ul>
-        {% for disciplina in disciplinas %}
-            <li>{{ disciplina[0] }} - {{ disciplina[1] }}</li>
-        {% endfor %}
-    </ul>
+        <div id="area-cabecalho">
+            <div id="area-logo">
+                <img src="{{ url_for('static', filename='imagens/icon_ifma.png') }}" alt="Logo IFMA"  width="380" height="122">
+            </div>
+            <div id="area-menu">
+                <a href="/cadastro_aluno">Cadastro Aluno</a>|
+                <a href="/cadastro_professor">Cadastro Professor</a>|
+                <a href="/cadastro_disciplina">Cadastro Disciplina</a>
+        </div>
+        </div>
+        
+<h1>Alunos</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Curso</th>
+        <th>Ações</th>
+    </tr>
+    {% for aluno in alunos %}
+    <tr>
+        <td>{{ aluno[0] }}</td>
+        <td>{{ aluno[1] }}</td>
+        <td>{{ aluno[2] }}</td>
+        <td>
+            <a href="/editar_aluno/{{ loop.index }}">Editar</a> |
+            <a href="/deletar_aluno/{{ loop.index }}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h1>Professores</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Curso</th>
+    </tr>
+    {% for professor in professores %}
+    <tr>
+        <td>{{ professor[0] }}</td>
+        <td>{{ professor[1] }}</td>
+        <td>{{ professor[2] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h1>Disciplinas</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Curso</th>
+    </tr>
+    {% for disciplina in disciplinas %}
+    <tr>
+        <td>{{ disciplina[0] }}</td>
+        <td>{{ disciplina[1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
     </main>
 </body>
 </html>
